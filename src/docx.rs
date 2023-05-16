@@ -180,7 +180,7 @@ impl DocxFile {
     }
 
     /// Parses content into `Docx` struct
-    pub fn parse<'a>(&'a self) -> DocxResult<Docx<'a>> {
+    pub fn parse(&self) -> DocxResult<Docx<'_>> {
         let app = if let Some(content) = &self.app {
             Some(App::from_str(content)?)
         } else {
@@ -214,7 +214,7 @@ impl DocxFile {
         let styles = self
             .styles
             .as_ref()
-            .map(|content| Styles::from_str(&content))
+            .map(|content| Styles::from_str(content))
             .transpose()?
             .unwrap_or_default();
 
